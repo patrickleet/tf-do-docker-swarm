@@ -24,3 +24,9 @@ module "docker_swarm" {
   swarm_snapshot_id = "26811737"
 }
 ```
+
+useful snippet for creating docker labels
+```
+"export CURRENT_SWARM_NODE=$$(echo 'ip-${self.private_ip}' | tr '.' '-')",
+"docker -H ${var.prod_swarm_manager_ip} node update --label-add reserved=true --label-add for=es-data-a $CURRENT_SWARM_NODE",
+```

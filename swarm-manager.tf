@@ -15,7 +15,9 @@ resource "digitalocean_droplet" "swarm-manager" {
 
   provisioner "remote-exec" {
     inline = [
-      "docker swarm join --token ${var.swarm_manager_token} --advertise-addr ${self.ipv4_address_private} ${var.swarm_manager_ip}:2377;"
+      "docker swarm join --token ${var.swarm_manager_token} --advertise-addr ${self.ipv4_address_private} ${var.swarm_manager_ip}:2377;",
+      "echo \"${data.template_file.rexray.rendered}\" | sudo tee /etc/rexray/config.yml",
+      "sudo rexray service start >/dev/null 2>/dev/null",
     ] 
   }
 }
