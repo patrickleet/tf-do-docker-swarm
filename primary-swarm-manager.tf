@@ -5,12 +5,15 @@ resource "digitalocean_droplet" "primary-swarm-manager" {
   name = "primary-swarm-manager" 
   region = "${var.swarm_region}"
   private_networking = true
-
+  tags = [
+    "${digitalocean_tag.docker_swarm_public.id}",
+    "${digitalocean_tag.docker_swarm.id}"
+  ]
   ssh_keys = [ "${digitalocean_ssh_key.docker.id}" ]
 
   connection {
     user = "root"
-    private_key = "${file("../../secrets/prod-swarm-key/do")}" 
+    private_key = "${file("${var.key_path}")}" 
     agent = false
   }
 

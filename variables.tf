@@ -1,3 +1,7 @@
+variable "dobs_token" {
+  default = ""
+}
+
 variable "swarm_manager_token" {
   default = ""
 }
