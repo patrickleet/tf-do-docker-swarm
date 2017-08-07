@@ -10,7 +10,7 @@ resource "digitalocean_firewall" "swarm" {
     {
       protocol           = "tcp"
       port_range         = "22"
-      source_addresses   = ["0.0.0.0/0"]
+      source_addresses   = ["0.0.0.0/0", "::/0"]
       source_tags = [
         "${digitalocean_tag.docker_swarm_public.id}",
       ]
@@ -18,6 +18,14 @@ resource "digitalocean_firewall" "swarm" {
     {
       protocol           = "tcp"
       port_range         = "80"
+      source_addresses   = ["0.0.0.0/0", "::/0"]
+      source_tags = [
+        "${digitalocean_tag.docker_swarm_public.id}",
+      ]
+    },
+    {
+      protocol           = "tcp"
+      port_range         = "443"
       source_addresses   = ["0.0.0.0/0", "::/0"]
       source_tags = [
         "${digitalocean_tag.docker_swarm_public.id}",
@@ -94,23 +102,19 @@ resource "digitalocean_firewall" "swarm" {
         "${digitalocean_tag.docker_swarm_public.id}",
         "${digitalocean_tag.docker_swarm.id}",
       ]
-    },
-    {
-      protocol           = "tcp"
-      port_range         = "443"
-      source_addresses   = ["0.0.0.0/0", "::/0"]
-      source_tags = [
-        "${digitalocean_tag.docker_swarm_public.id}",
-      ]
-    },
+    }
   ]
 
-  outbound_rule {
-    port_range              = "0"
-    destination_addresses   = ["0.0.0.0/0", "::/0"]
-    destination_tags = [
-      "${digitalocean_tag.docker_swarm_public.id}",
-      "${digitalocean_tag.docker_swarm.id}",
-    ]
-  }
+  outbound_rule = [
+    {
+      protocol                = "tcp"
+      port_range              = "all"
+      destination_addresses   = ["0.0.0.0/0", "::/0"]
+    },
+    {
+      protocol                = "udp"
+      port_range              = "all"
+      destination_addresses   = ["0.0.0.0/0", "::/0"]
+    }
+  ]
 }

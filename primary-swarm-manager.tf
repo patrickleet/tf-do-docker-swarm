@@ -13,7 +13,7 @@ resource "digitalocean_droplet" "primary-swarm-manager" {
 
   connection {
     user = "root"
-    private_key = "${file("${var.key_path}")}" 
+    private_key = "${file("${var.private_key_path}")}"
     agent = false
   }
 

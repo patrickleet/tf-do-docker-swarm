@@ -49,3 +49,11 @@ variable "key_name" {
 variable "key_path" {
   default = ""
 }
+
+variable "private_key_path" {
+  default = ""
+}
+
+variable "primary_manager_private_ip" {
+  default = "0.0.0.0"
+}

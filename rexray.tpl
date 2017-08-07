@@ -5,7 +5,7 @@ libstorage:
       dobs:
         driver: dobs
         dobs:
-          token: ${do_token}
+          token: ${dobs_token}
           region: ${swarm_region}
           tag: rexray
           convertUnderscores: true
