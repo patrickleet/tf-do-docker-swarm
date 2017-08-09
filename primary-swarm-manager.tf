@@ -20,6 +20,7 @@ resource "digitalocean_droplet" "primary-swarm-manager" {
   provisioner "remote-exec" {
     inline = [
       "docker swarm init --advertise-addr ${self.ipv4_address_private};",
+      "docker node update --label-add reserved=true --label-add for=primary-swarm-manager ${self.name}",
       "echo \"${data.template_file.rexray.rendered}\" | sudo tee /etc/rexray/config.yml",
       "sudo rexray service start >/dev/null 2>/dev/null",
     ] 

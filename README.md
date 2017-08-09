@@ -27,6 +27,5 @@ module "docker_swarm" {
 
 useful snippet for creating docker labels
 ```
-"export CURRENT_SWARM_NODE=$$(echo 'ip-${self.private_ip}' | tr '.' '-')",
-"docker -H ${var.prod_swarm_manager_ip} node update --label-add reserved=true --label-add for=es-data-a $CURRENT_SWARM_NODE",
+"docker -H ${var.primary_manager_private_ip} node update --label-add reserved=true --label-add for=jenkins-master ${self.name}",
 ```

@@ -57,3 +57,19 @@ variable "private_key_path" {
 variable "primary_manager_private_ip" {
   default = "0.0.0.0"
 }
+
+variable "jenkins_master_size" {
+  default = "4gb"
+}
+
+variable "jenkins_agent_size" {
+  default = "512mb"
+}
+
+variable "jenkins_masters" {
+  default = 0
+}
+
+variable "jenkins_agents" {
+  default = 0
+}
