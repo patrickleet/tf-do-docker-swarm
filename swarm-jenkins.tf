@@ -7,7 +7,9 @@ resource "digitalocean_droplet" "swarm-worker-jenkins-master" {
   private_networking = true
   ssh_keys = [ "${digitalocean_ssh_key.docker.id}" ]
   tags = [
-    "${digitalocean_tag.docker_swarm.id}"
+    "${digitalocean_tag.docker_swarm.id}",
+    "${digitalocean_tag.jenkins.id}",
+    "${digitalocean_tag.jenkins_master.id}"
   ]
 
   connection {
@@ -35,7 +37,9 @@ resource "digitalocean_droplet" "swarm-worker-jenkins-agent" {
   private_networking = true
   ssh_keys = [ "${digitalocean_ssh_key.docker.id}" ]
   tags = [
-    "${digitalocean_tag.docker_swarm.id}"
+    "${digitalocean_tag.docker_swarm.id}",
+    "${digitalocean_tag.jenkins.id}",
+    "${digitalocean_tag.jenkins_agent.id}"
   ]
 
   connection {

@@ -6,6 +6,10 @@ resource "digitalocean_tag" "docker_swarm" {
   name = "docker-swarm"
 }
 
+resource "digitalocean_tag" "jenkins" {
+  name = "jenkins"
+}
+
 resource "digitalocean_tag" "jenkins_master" {
   name = "jenkins-master"
 }
