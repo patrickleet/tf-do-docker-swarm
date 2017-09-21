@@ -58,6 +58,14 @@ variable "primary_manager_private_ip" {
   default = "0.0.0.0"
 }
 
+variable "monitor_worker_size" {
+  default = "4gb"
+}
+
+variable "monitor_workers" {
+  default = 0
+}
+
 variable "jenkins_master_size" {
   default = "4gb"
 }
